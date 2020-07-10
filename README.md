@@ -6,7 +6,7 @@
 ## Installing
 
 ```shell
-$ composer require tanren1234/rsa -vvv
+$ composer require tanren1234/rsa:dev-master -vvv
 ```
 
 ## Usage
