@@ -1,0 +1,16 @@
+{
+    "name": "tanren1234/rsa",
+    "description": "A rsa SDK.",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "tanren",
+            "email": "672019554@qq.com"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "Rsa\\": "./src/Rsa"
+        }
+    }
+}
