@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>加签验签demo</title>
+    <!-- Tell the browser to be responsive to screen width -->
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+    <link href="http://libs.baidu.com/bootstrap/3.0.3/css/bootstrap.min.css" rel="stylesheet">
+    <script src="http://libs.baidu.com/bootstrap/3.0.3/js/bootstrap.min.js"></script>
+    <script src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
+</head>
+<body class="hold-transition login-page">
+<div class="page-header">
+    <center> <h1>公钥加密私钥解密</h1></center>
+</div>
+
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">
+            公钥加密 <button type="button" class="btn btn-success" onclick="encryption();">公钥加密</button>
+        </h3>
+
+    </div>
+    <div class="panel-body">
+        <div class="form-group">
+            <label for="tag" class="col-md-1 control-label">公钥</label>
+            <div class="col-md-4">
+                <textarea name="prikey2" id="pubkey" rows="7" cols="120">
+-----BEGIN PUBLIC KEY-----
+MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAwcW/35mDif5a1QH+1Nt6
+jOI3KVO1guWltgMziGXVCDv6LTmCRnaontQr9mkk3T4JKJrz8ahX52YHVaOqkh8n
+1lap1Y1UUxppP6QbNaBssv2y5H9B/6wWMiMAY1RgVRLjNzObWhXX4R54YEyCbxIv
+e3FbzR3wzkk9fu2ICnj8QKytS7B7fqJmU3HlOl/X2i9Lei9mkntDD3/NlN9CisVF
+qchLhVGffZ62S2rqa6xgpPhHhfyYPqU9590SLY3yiTzS6Vmal62WK10A0p3AwBmh
+Eu7zGLJ8FoNL0hWiEeXRMopoB/EUg0NUSDrj6N/dowmFad7ezbULEmoniocis2S6
+QQIDAQAB
+-----END PUBLIC KEY-----
+                </textarea>
+            </div>
+        </div>
+    </div>
+    <div class="panel-body">
+        <div class="form-group">
+            <label for="tag" class="col-md-1 control-label">加密原文</label>
+            <div class="col-md-4">
+                <textarea name="textresult2" id="textorigin" rows="3" cols="120">加密原文！</textarea>
+            </div>
+        </div>
+    </div>
+    <div class="panel-body">
+        <div class="form-group">
+            <label for="tag" class="col-md-1 control-label">加密内容</label>
+            <div id="encryption" style="width: 100%;word-wrap:break-word;
+word-break:break-all;
+overflow: hidden;"></div>
+        </div>
+    </div>
+</div>
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">
+            私钥解密 <button type="button" class="btn btn-success" onclick="decryption();">私钥解密</button>
+        </h3>
+
+    </div>
+    <div class="panel-body">
+        <div class="form-group">
+            <label for="tag" class="col-md-1 control-label">私钥</label>
+            <div class="col-md-4">
+                <textarea name="pubkey2" id="prikey" rows="5" cols="120">
+-----BEGIN PRIVATE KEY-----
+MIIEvgIBADANBgkqhkiG9w0BAQEFAASCBKgwggSkAgEAAoIBAQDBxb/fmYOJ/lrV
+Af7U23qM4jcpU7WC5aW2AzOIZdUIO/otOYJGdqie1Cv2aSTdPgkomvPxqFfnZgdV
+o6qSHyfWVqnVjVRTGmk/pBs1oGyy/bLkf0H/rBYyIwBjVGBVEuM3M5taFdfhHnhg
+TIJvEi97cVvNHfDOST1+7YgKePxArK1LsHt+omZTceU6X9faL0t6L2aSe0MPf82U
+30KKxUWpyEuFUZ99nrZLauprrGCk+EeF/Jg+pT3n3RItjfKJPNLpWZqXrZYrXQDS
+ncDAGaES7vMYsnwWg0vSFaIR5dEyimgH8RSDQ1RIOuPo392jCYVp3t7NtQsSaieK
+hyKzZLpBAgMBAAECggEAQDRYvirshcWsrRWLLVZHxfSSmHPvGZ8kCCoJYjFzo9XT
+sDZ07woUFwRwSKZQG6qZeEXXfIPuFHMfDQY810vRdFikz2iTvzFqHDcw+NTeD3S2
+WLW91YxckmI8l6z2elnWxYyo9fF05VemRSo0sb7R0tIdu9om1wM3iB4GTIoH8xlw
+cUtSlX+8FYR3kPZxzJ343xhX8cgpaTx6UWFFTg+s/wmoEZorYGZRAjQLrEQQ32FM
+/kxd00sZlNVf556HHb0779Xs6Gjdc6oOX8m2Dni/Q4t3n0JFfDCP954BUVdOmv3J
+U3ODxe5Eqa+Bs5TEn6fR1/wJLqEA5EqtZUJpu6LxQQKBgQDkd2LkZQjpXqLDPXeW
+cCxVtwuwFPfmKenQL1UchDZGtohICn14yoFWtb9Zt9yvlEDOFDSNr40zqrIPBsk2
+nnDnSOM0yhg26+MKdSl0dqUmJ9FkHCvRwlbug57UCJLVds3TpQfQzx1o3Map4iIJ
+xzLp4WwsPtIdMsQ2zgn+heTxmQKBgQDZH/3lv0GL49yYTFGC49S0pn1PN2b18CNw
+xzGIoCind34I41AE890wU+8AEflLMMftdCucQ6gLj2K4BQjp2CRgtBHB3C5ZT9Jn
+VHVNSW8JZdrUkZ+1WJ4CaRiQSvtkHELUexes6oHSAMXHbHC/hH/hkwMxwSoqHMSV
+ekudjr1G6QKBgQCna/2iVY/0RI+N98tdCRLUNXFxNcx8dJaNI0KBxTlpFHZGJLnR
+/MRPYJy7CIvGdyQOYKwqcE1PYXVeoaBuUCl4s+ccVkTsamxUy4r3d8KKdX9yl1pd
+OsctvnJz+1xu5cLrp/JUSJLKt482Cyrac4mR7smwmtCq6Pr1FoQoasJdcQKBgQCA
+f6CB0fj203oAYFp1PmTqLQZIVZ+HugEfg6PbGf41blCW7gCzjafALExsHDcPuuT3
+sSMGLjxL6yYfhktKKfMNkERaGPcNQGJjaOarQOSICVHDMBP2/WU2RACXlOjGzLr4
+iYjvezItmOt0JMdtcPtGAv2G+qz7k178oA4URx/Z0QKBgED3fau/wL0SjGIe1RDf
+uX3gEvoppXVbtlP0fSn5cNQIgPdbLdeBkW82HJtukyWMGzzAug5q+AQhwccmCGvZ
+vgGRj7Bt/+AU+Vie8E/D7gRpcvP3hTwP+iI3qXL94NvJUiEYGOxtBEwAG39n2CRL
+WuM89QS+19BhOHcNDv7mTweD
+-----END PRIVATE KEY-----
+                </textarea>
+            </div>
+        </div>
+    </div>
+    <div class="panel-body">
+        <div class="form-group">
+            <label for="tag" class="col-md-1 control-label">解密</label>
+            <div class="col-md-4">
+                <textarea name="signresult2" id="textencry" rows="3" cols="120">解密原文</textarea>
+            </div>
+        </div>
+    </div>
+    <div class="panel-body">
+        <div class="form-group">
+            <label for="tag" class="col-md-1 control-label">解密结果</label>
+            <div id="result" style="width: 100%;color:red;font-weight: bold"></div>
+        </div>
+    </div>
+</div>
+
+</body>
+
+
+
+<script type="text/javascript">
+
+    function encryption(){
+        var pubkey= document.getElementById('pubkey').value;
+        var textorigin= document.getElementById('textorigin').value;
+        $.ajax({
+            type : 'post',
+            data : {pubkey:pubkey,textorigin:textorigin},
+            url : "/api/encryption",
+            dataType:'json',
+            success : function(json){
+                if(json.code==200){
+                    document.getElementById('encryption').innerHTML =json.data;
+                }else{
+                    document.getElementById('encryption').innerHTML =json.msg;
+                }
+            },
+            error:function(json){
+                alert('系统繁忙!');
+            },
+            beforeSend : function(){
+
+            },
+            complete : function(){
+
+            }
+        });
+    }
+    function decryption(){
+        var prikey= document.getElementById('prikey').value;
+        var textencry= document.getElementById('textencry').value;
+        $.ajax({
+            type : 'post',
+            data : {textencry:textencry,prikey:prikey},
+            url : "api/decryption",
+            dataType:'json',
+            success : function(json){
+                if(json.code==200){
+                    document.getElementById('result').innerHTML =json.data;
+                }else{
+                    document.getElementById('result').innerHTML =json.msg;
+                }
+
+            },
+            error:function(json){
+                alert('系统繁忙!');
+            },
+            beforeSend : function(){
+
+            },
+            complete : function(){
+
+            }
+        });
+    }
+
+</script>
+</body>
+</html>
