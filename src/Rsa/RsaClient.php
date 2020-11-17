@@ -137,6 +137,7 @@ class RsaClient
             if (strpos($priKey,'-----') !== false) {
                 $res = $priKey;
             }else{
+				$priKey = str_replace(array("\n", "\r"), array("", ""), $priKey);
                 $res = "-----BEGIN RSA PRIVATE KEY-----\n" .
                     wordwrap($priKey, 64, "\n", true) .
                     "\n-----END RSA PRIVATE KEY-----";
@@ -159,6 +160,7 @@ class RsaClient
             if (strpos($pubKey,'-----') !== false) {
                 $res = $pubKey;
             }else{
+				$pubKey = str_replace(array("\n", "\r"), array("", ""), $pubKey);
                 $res = "-----BEGIN PUBLIC KEY-----\n" .
                     wordwrap($pubKey, 64, "\n", true) .
                     "\n-----END PUBLIC KEY-----";
